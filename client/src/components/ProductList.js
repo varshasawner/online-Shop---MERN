@@ -48,30 +48,33 @@ const ProductList = () => {
             <input type="" className='search-product-box' placeholder='Search Product'
             onChange={searchHandle}
              />
-            <ul>
-                <li>S. No.</li>
-                <li>Name</li>
-                <li>Price</li>
-                <li>Category</li>
-                <li>Operation</li>
+             <table border="1" cellPadding="15px">
+            <tr>
+                <th>S. No.</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Operation</th>
 
-            </ul>
+            </tr>
             {
                 products.length>0 ? products.map((item, index) =>
-                    <ul key={item._id}>
-                        <li>{index + 1}</li>
-                        <li>{item.name}</li>
-                        <li>{item.price}</li>
-                        <li>{item.category}</li>
-                        <li>
-                            <button onClick={() => deleteProduct(item._id)}>Delete</button>
-                            <Link to={"/update/"+item._id} >Update </Link>
-                            </li>
+                    <tr key={item._id}>
+                        <td>{index + 1}</td>
+                        <td>{item.name}</td>
+                        <td>{item.price}</td>
+                        <td>{item.category}</td>
+                        <td>
+                            <button onClick={() => deleteProduct(item._id)} className="deleteBtn">Delete</button>
+                            <Link to={"/update/"+item._id} className="updateBtn">Update </Link>
+                            </td>
 
-                    </ul>
+                    </tr>
                 )
                 :<h1>No Result Found</h1>
             }
+            </table>
+            
         </div>
     )
 }

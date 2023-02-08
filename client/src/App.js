@@ -8,15 +8,19 @@ import Login from './components/Login'
 import AddProduct from './components/AddProduct';
 import ProductList from './components/ProductList';
 import UpdateProduct from './components/UpdateComponent';
+import Header from './components/Header';
+import Catagory from './components/Catagory';
 
 function App() {
   return (
     <div className="App">
+      <Header></Header>
       <BrowserRouter >
       <Nav />
      <Routes>
        <Route element={<PrivateComponent />}>
        <Route path="/" element={<ProductList />} />
+       <Route path="/catagory" element={<Catagory />} />
        <Route path="/add" element={<AddProduct />} />
        <Route path="/update/:id" element={<UpdateProduct />} />
        <Route path="/logout" element={<h1> Logout Component</h1>} />
