@@ -4,6 +4,7 @@ require("./db/conn");
 const User = require('./db/User');
 const Product = require("./db/Product")
 const Jwt = require('jsonwebtoken');
+const Catagory = require("./db/Catagory");
 const jwtKey = 'e-com';
 const app = express();
 
@@ -16,14 +17,6 @@ app.post("/register", (req, resp) => {
     user.save().then(()=>{
         resp.send({message : "User Saved"});
     });
-    // result = result.toObject();
-    // delete result.password
-    // Jwt.sign({result}, jwtKey, {expiresIn:"2h"},(err,token)=>{
-    //     if(err){
-    //         resp.send("Something went wrong")  
-    //     }
-    //     resp.send({result,auth:token})
-    // })
 })
 
 app.post("/login", async (req, resp) => {
@@ -87,6 +80,12 @@ app.put("/product/:id", async (req, resp) => {
         { $set: req.body }
     )
     resp.send(result)
+});
+
+app.post("/add-catagory", async (req, resp) => {
+    let catagory = new Catagory(req.body);
+    let result = await catagory.save();
+    resp.send(result);
 });
 
 app.get("/search/:key", async (req, resp) => {
