@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
 
 const UpdateProduct = () => {
-    const [name, setName] = React.useState('');
-    const [price, setPrice] = React.useState('');
-    const [category, setCategory] = React.useState('');
-    const [company, setCompnay] = React.useState('');
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState('');
+    const [category, setCategory] = useState('');
+    const [company, setCompnay] = useState('');
     const params = useParams();
     const navigate = useNavigate();
 
@@ -57,7 +57,6 @@ const UpdateProduct = () => {
             <input type="text" placeholder='Enter product company' className='inputBox'
                 value={company} onChange={(e) => { setCompnay(e.target.value) }}
             />
-
 
             <button onClick={updateProduct} className='appButton'>Update Product</button>
         </div>

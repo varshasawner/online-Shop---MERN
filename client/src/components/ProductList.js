@@ -18,13 +18,16 @@ const ProductList = () => {
     }
 
     const deleteProduct = async (id) => {
-        console.warn(id)
-        let result = await fetch(`http://localhost:5000/product/${id}`, {
+        console.log(id)
+        const confirmation = window.confirm("Are You Sure ? Want to Delete this Product");
+        if(confirmation){
+            let result = await fetch(`http://localhost:5000/product/${id}`, {
             method: "Delete"
         });
         result = await result.json();
         if (result) {
             getProducts();
+        }
         }
     }
 
@@ -54,6 +57,7 @@ const ProductList = () => {
                 <th>Name</th>
                 <th>Price</th>
                 <th>Category</th>
+                <th>Image</th>
                 <th>Operation</th>
 
             </tr>
@@ -64,6 +68,7 @@ const ProductList = () => {
                         <td>{item.name}</td>
                         <td>{item.price}</td>
                         <td>{item.category}</td>
+                        <td><img src="" /></td>
                         <td>
                             <button onClick={() => deleteProduct(item._id)} className="deleteBtn">Delete</button>
                             <Link to={"/update/"+item._id} className="updateBtn">Update </Link>

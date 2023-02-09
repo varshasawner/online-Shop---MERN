@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 const AddProduct = () => {
-    const [name, setName] = React.useState('');
-    const [price, setPrice] = React.useState('');
-    const [category, setCategory] = React.useState('');
-    const [company, setCompnay] = React.useState('');
-    const [error,setError] = React.useState(false);
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState('');
+    const [category, setCategory] = useState('');
+    const [picture, setPicture] = useState('');
+    const [company, setCompnay] = useState('');
+    const [description, setDescription] = useState('');
+    const [error,setError] = useState(false);
     const navigate = useNavigate();
 
     const addProduct = async () => {
 
-        if(!name || !price || !company || !category)
+        if(!name || !price || !company || !category || !picture || !description)
         {
             setError(true);
             return false
@@ -46,6 +48,11 @@ const AddProduct = () => {
             />
             {error && !price && <span className='invalid-input'>Enter valid price</span>}
 
+            <input type="text" placeholder='Enter product company' className='inputBox'
+                value={company} onChange={(e) => { setCompnay(e.target.value) }}
+            />
+            {error && !company && <span className='invalid-input'>Enter valid company</span>}
+
             <select className='inputBox' value={category} onChange={(e) => { setCategory(e.target.value) }}>
                 <option value="">Select Category</option>
                 <option value="Furniture">Furniture</option>
@@ -54,10 +61,15 @@ const AddProduct = () => {
             </select>
             {error && !category && <span className='invalid-input'>Enter valid category</span>} 
 
-            <input type="text" placeholder='Enter product company' className='inputBox'
-                value={company} onChange={(e) => { setCompnay(e.target.value) }}
+            <input type="file" className='inputBox' accept='image/*'
+                value={picture} onChange={(e) => { setPicture(e.target.value) }}
             />
-            {error && !company && <span className='invalid-input'>Enter valid company</span>}
+            {error && !picture && <span className='invalid-input'>Upload Atleast One product Image</span>}
+
+            <textarea className='inputBox' placeholder='Enter Product Description'
+                value={description} onChange={(e) => { setDescription(e.target.value) }}
+            ></textarea>
+            {error && !description && <span className='invalid-input'>Upload Atleast One product Image</span>}
 
 
             <button onClick={addProduct} className='appButton'>Add Product</button>

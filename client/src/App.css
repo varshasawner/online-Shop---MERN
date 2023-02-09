@@ -61,8 +61,11 @@ table{
 }
 .catagory{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
+}
+.catagoryList{
+  margin-top: 50px;
 }
 
 
