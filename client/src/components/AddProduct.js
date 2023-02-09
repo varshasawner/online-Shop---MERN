@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'
 
 const AddProduct = () => {
     const [name, setName] = React.useState('');
@@ -6,6 +7,7 @@ const AddProduct = () => {
     const [category, setCategory] = React.useState('');
     const [company, setCompnay] = React.useState('');
     const [error,setError] = React.useState(false);
+    const navigate = useNavigate();
 
     const addProduct = async () => {
 
@@ -15,16 +17,19 @@ const AddProduct = () => {
             return false
         }
 
-        const userId = JSON.parse(localStorage.getItem('user'))._id;
+        const adminId = JSON.parse(localStorage.getItem('admin'))._id;
         let result = await fetch("http://localhost:5000/add-product", {
             method: "post",
-            body: JSON.stringify({ name, price, category, company, userId }),
+            body: JSON.stringify({ name, price, category, company, adminId }),
             headers: {
                 "Content-type": "application/json"
             }
         });
         result = await result.json();
         console.warn(result)
+        if(result){
+            navigate("/")
+        }
 
     }
 
@@ -41,9 +46,12 @@ const AddProduct = () => {
             />
             {error && !price && <span className='invalid-input'>Enter valid price</span>}
 
-            <input type="text" placeholder='Enter product category' className='inputBox'
-                value={category} onChange={(e) => { setCategory(e.target.value) }}
-            />
+            <select className='inputBox' value={category} onChange={(e) => { setCategory(e.target.value) }}>
+                <option value="">Select Category</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Home Decor">Home Decor</option>
+                <option value="Electronic">Electronic</option>
+            </select>
             {error && !category && <span className='invalid-input'>Enter valid category</span>} 
 
             <input type="text" placeholder='Enter product company' className='inputBox'

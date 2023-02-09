@@ -9,7 +9,7 @@ import AddProduct from './components/AddProduct';
 import ProductList from './components/ProductList';
 import UpdateProduct from './components/UpdateComponent';
 import Header from './components/Header';
-import Catagory from './components/Catagory';
+import Category from './components/Category';
 import AdminProfile from './components/AdminProfile';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route element={<PrivateComponent />}>
             <Route path="/" element={<ProductList />} />
-            <Route path="/catagory" element={<Catagory />} />
+            <Route path="/category" element={<Category />} />
             <Route path="/add" element={<AddProduct />} />
             <Route path="/update/:id" element={<UpdateProduct />} />
             <Route path="/logout" element={<h1> Logout Component</h1>} />

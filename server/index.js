@@ -4,7 +4,7 @@ require("./db/conn");
 const User = require('./db/User');
 const Product = require("./db/Product")
 const Jwt = require('jsonwebtoken');
-const Catagory = require("./db/Catagory");
+const Category = require("./db/Category");
 const jwtKey = 'e-com';
 const app = express();
 
@@ -40,6 +40,13 @@ app.post("/login", async (req, resp) => {
 app.post("/add-product", async (req, resp) => {
     let product = new Product(req.body);
     let result = await product.save();
+    resp.send(result);
+});
+
+app.post("/add-category", async (req, resp) => {
+    let category = new Category(req.body);
+    // console.log(category);
+    let result = await category.save();
     resp.send(result);
 });
 
