@@ -4,10 +4,9 @@ const mongoose = require('mongoose');
 // dotenv.config({path: "./config.env"})
 require('dotenv').config({ path: "./config.env" });
 
-// const DB = "mongodb+srv://varsha:tdf3iL6XDFr8hfY0@cluster0.w9f7sj1.mongodb.net/?retryWrites=true&w=majority";
 const DB = process.env.DATABASE;
 mongoose.set("strictQuery", false);
-mongoose.connect("mongodb+srv://varsha:tdf3iL6XDFr8hfY0@cluster0.w9f7sj1.mongodb.net/?retryWrites=true&w=majority", {
+mongoose.connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
