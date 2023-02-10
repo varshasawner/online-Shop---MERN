@@ -22,7 +22,7 @@ const AddProduct = () => {
         const adminId = JSON.parse(localStorage.getItem('admin'))._id;
         let result = await fetch("http://localhost:5000/add-product", {
             method: "post",
-            body: JSON.stringify({ name, price, category, company, adminId }),
+            body: JSON.stringify({ name, price, category, company, adminId, description }),
             headers: {
                 "Content-type": "application/json"
             }
@@ -32,7 +32,6 @@ const AddProduct = () => {
         if(result){
             navigate("/")
         }
-
     }
 
     return (
@@ -70,7 +69,6 @@ const AddProduct = () => {
                 value={description} onChange={(e) => { setDescription(e.target.value) }}
             ></textarea>
             {error && !description && <span className='invalid-input'>Upload Atleast One product Image</span>}
-
 
             <button onClick={addProduct} className='appButton'>Add Product</button>
         </div>
